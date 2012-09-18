@@ -41,6 +41,16 @@ describe "Micropost pages" do
       end
     end
   end
+  describe 'Micropost correct count on home page' do
+    let!(:m1) {FactoryGirl.create(:micropost, user: user, content: "First comment")}
+    before { visit root_path}
 
+    it { should have_content ("#{user.microposts.count} micropost") }
+#    describe "2nd count on home page" do
+      let!(:m2) {FactoryGirl.create(:micropost, user: user, content: "Second comment")}
+      before { visit root_path}
+      it { should have_content ("#{user.microposts.count} microposts") }
+ #   end
+  end
 end
 
